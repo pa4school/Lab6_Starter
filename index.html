@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,12 +14,13 @@
   <link rel="stylesheet" href="assets/styles/main.css" />
   <script src="assets/scripts/main.js" type="module"></script>
 </head>
+
 <body>
   <main>
     <!-- Add Recipes Here -->
   </main>
   <!-- For the Explore section - Remove "hidden" class before beginning -->
-  <form id="new-recipe" class="hidden">
+  <form id="new-recipe">
     <fieldset>
       <legend>Image:</legend>
       <label for="image-src">
@@ -76,12 +78,12 @@
       </label>
       <label for="ingredients">
         <p>Ingredients:</p>
-        <textarea name="ingredients" id="ingredients" cols="38" rows="5"
-          required></textarea>
+        <textarea name="ingredients" id="ingredients" cols="38" rows="5" required></textarea>
       </label>
     </fieldset>
     <button type="submit">Add Recipe</button>
     <button type="button" class="danger">Clear Local Storage</button>
   </form>
 </body>
+
 </html>

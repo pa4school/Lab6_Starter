@@ -7,9 +7,9 @@ class RecipeCard extends HTMLElement {
 		super(); // Inheret everything from HTMLElement
 
 		// EXPOSE - START (All expose numbers start with A)
-		const shadow = this.attachShadow({ mode: 'open' });
-		const article = document.createElement('article');
-		const style = document.createElement('style');
+		const shadow = this.attachShadow({ mode: 'open' })
+		const article = document.createElement('article')
+		const style = document.createElement('style')
 
 		// A4. TODO - Insert all of the styles from cardTemplate.html into the <style> element you just made
 		const cardTemplate = `

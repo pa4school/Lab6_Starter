@@ -22,9 +22,9 @@ function init() {
  */
 function getRecipesFromStorage() {
   // A9. Complete the functionality as described in this function
-  let recipes = localStorage.getItem('recipes');
-  if (!recipes) return [];
-  return JSON.parse(recipes);
+  let recipes = localStorage.getItem('recipes')
+  if (!recipes) return []
+  return JSON.parse(recipes)
 }
 
 /**
@@ -38,10 +38,10 @@ function addRecipesToDocument(recipes) {
   const main = document.querySelector('main');
 
   recipes.forEach(recipe => {
-    const recipeCard = document.createElement('recipe-card');
-    recipeCard.data = recipe;
-    main.appendChild(recipeCard);
-  });
+    const recipeCard = document.createElement('recipe-card')
+    recipeCard.data = recipe
+    main.appendChild(recipeCard)
+  })
 }
 
 /**
@@ -51,38 +51,61 @@ function addRecipesToDocument(recipes) {
  */
 function saveRecipesToStorage(recipes) {
   // EXPLORE - START (All explore numbers start with B)
-  // B1. TODO - Complete the functionality as described in this function
-  //            header. It is possible in only a single line, but should
-  //            be no more than a few lines.
+  // B1.
+  const recipesString = JSON.stringify(recipes)
+  localStorage.setItem('recipes', recipesString)
 }
+
+/**
+ * Adds event listeners to the form elements (B4-B9)
+ * @param {HTMLFormElement} form The <form> element
+ */
+const formRequest = (event, form) => {
+  event.preventDefault();
+  console.log('form submitted')
+
+  // B4 - B5
+  const formData = new FormData(form)
+  const recipeObject = {};
+  for (let [key, value] of formData) {
+    recipeObject[key] = value
+  }
+
+  // B6 - B7
+  const recipeCard = document.createElement('recipe-card');
+  recipeCard.data = recipeObject
+
+  // B8. Append this new <recipe-card> to <main>
+  const main = document.querySelector('main');
+  main.appendChild(recipeCard)
+
+  // B9. Get the recipes array from localStorage, add this new recipe to it, and
+  //            then save the recipes array back to localStorage
+  const recipes = getRecipesFromStorage()
+  recipes.push(recipeObject)
+  saveRecipesToStorage(recipes)
+}
+
 
 /**
  * Adds the necesarry event handlers to <form> and the clear storage
  * <button>.
  */
 function initFormHandler() {
+  const main = document.querySelector('main')
+  // B2 + B10
+  const form = document.querySelector('form#new-recipe')
+  const clearButton = document.querySelector('#new-recipe button.danger')
 
-  // B2. TODO - Get a reference to the <form> element
+  // B3. Add an event listener for the 'submit' event
+  form?.addEventListener('submit', (event) => formRequest(event, form))
 
-  // B3. TODO - Add an event listener for the 'submit' event, which fires when the
-  //            submit button is clicked
-
-  // Steps B4-B9 will occur inside the event listener from step B3
-  // B4. TODO - Create a new FormData object from the <form> element reference above
-  // B5. TODO - Create an empty object (I'll refer to this object as recipeObject to
-  //            make this easier to read), and then extract the keys and corresponding
-  //            values from the FormData object and insert them into recipeObject
-  // B6. TODO - Create a new <recipe-card> element
-  // B7. TODO - Add the recipeObject data to <recipe-card> using element.data
-  // B8. TODO - Append this new <recipe-card> to <main>
-  // B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
-  //            then save the recipes array back to localStorage
-
-  // B10. TODO - Get a reference to the "Clear Local Storage" button
-  // B11. TODO - Add a click event listener to clear local storage button
-
-  // Steps B12 & B13 will occur inside the event listener from step B11
-  // B12. TODO - Clear the local storage
-  // B13. TODO - Delete the contents of <main>
-
+  // B11. Add a click event listener to clear local storage button
+  clearButton?.addEventListener('click',
+    // B12. Clear the local storage
+    // B13. Delete the contents of <main>
+    () => {
+      localStorage.clear()
+      main.innerHTML = ''
+    })
 }
