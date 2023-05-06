@@ -67,9 +67,17 @@ const formRequest = (event, form) => {
   // B4 - B5
   const formData = new FormData(form)
   const recipeObject = {};
-  for (let [key, value] of formData) {
+  formData.forEach((value, key) => {
+    // Special cases
+    if (key === 'rating' || key === 'numRatings') {
+      value = Number(value)
+    } else if (key === 'ingredients') {
+      value = value.split('\n')
+    }
+
+    // Otherwise, just set the value
     recipeObject[key] = value
-  }
+  })
 
   // B6 - B7
   const recipeCard = document.createElement('recipe-card');
